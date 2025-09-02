@@ -9,7 +9,7 @@
 	force = 4
 	custom_materials = list(/datum/material/iron=SHEET_MATERIAL_AMOUNT)
 	clumsy_check = FALSE
-	fire_sound = 'sound/items/syringeproj.ogg'
+	fire_sound = 'sound/effects/spray2.ogg'
 
 /obj/item/gun/water/Initialize(mapload)
 	. = ..()
