@@ -351,16 +351,15 @@
 	unbuckle_mob(passenger, TRUE)
 
 /obj/golfcart_rear/is_buckle_possible(mob/living/target, force, check_loc)
-	. = ..()
 	// these are to_viewers because you can buckle someone on their behalf
-	if (parent && cargo)
+	if (cargo)
 		balloon_alert_to_viewers("blocked!")
 		return FALSE
 	if (target.body_position != STANDING_UP)
-		if (!has_buckled_mobs())
-			return TRUE
-		balloon_alert_to_viewers("stand up!")
-		return FALSE
+		if (has_buckled_mobs())
+			balloon_alert_to_viewers("stand up!")
+			return FALSE
+		return ..()
 	for (var/mob/blocker in buckled_mobs)
 		if (!isliving(blocker))
 			balloon_alert_to_viewers("blocked!")
@@ -369,7 +368,7 @@
 		if (living_blocker.body_position != STANDING_UP)
 			balloon_alert_to_viewers("blocked!")
 			return FALSE
-	return TRUE
+	return ..()
 
 ///Called on COMSIG_MOVABLE_PREBUCKLE for anything that's buckled to us. Disallows stacking buckles
 /obj/golfcart_rear/proc/on_attempted_bucklestack()
